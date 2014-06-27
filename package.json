@@ -1,0 +1,34 @@
+{
+  "name": "moefm-cli",
+  "version": "0.0.1",
+  "description": "MoeFM cli player client based on node.js.",
+  "main": "index.js",
+  "dependencies": {
+    "colorful": "~2.1.0",
+    "node-notifier": "~3.0.6",
+    "spidex": "~1.0.6",
+    "sprintf": "~0.1.3",
+    "term-canvas": "~0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:XadillaX/moefm-cli.git"
+  },
+  "keywords": [
+    "moefm",
+    "fm",
+    "cli",
+    "music",
+    "player"
+  ],
+  "author": "XadillaX",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/XadillaX/moefm-cli/issues"
+  },
+  "homepage": "https://github.com/XadillaX/moefm-cli"
+}
