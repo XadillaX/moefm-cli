@@ -14,24 +14,78 @@ var Display = function(app) {
     this.app = app;
     
     this.headers = [
-        "MoeFM CLI Player " + color.red(app.version)
+        "MoeFM CLI Player v" + color.red(app.version)
     ];
 
     this.body = [];
+
+    this.auto = null;
+
+    // 各种 timer
+    this.initTimer = null;
+};
+
+Display.prototype.autoRefresh = function() {
+    this.stopAutoRefresh();
+    var self = this;
+    this.auto = setInterval(this.display.bind(self), 20);
+};
+
+Display.prototype.stopAutoRefresh = function() {
+    if(null !== this.auto) {
+        clearInterval(this.auto);
+        this.auto = null;
+    }
 };
 
 Display.prototype.setInit = function() {
+    var self = this;
+
     this.body = [
-        color.cyan("播放器初始化中...")
+        color.cyan("播放器初始化中...-")
+    ];
+
+    var textArray = [
+        "播放器初始化中...-",
+        "播放器初始化中...\\",
+        "播放器初始化中...|",
+        "播放器初始化中.../"
+    ];
+    var dictIdx = 0;
+    this.initTimer = setInterval(function() {
+        dictIdx = (dictIdx + 1) % 4;
+        self.body = [
+            color.cyan(textArray[dictIdx])
+        ];
+    }, 100);
+
+    this.display();
+};
+
+Display.prototype.initDone = function() {
+    //this.stopAutoRefresh();
+    if(this.initTimer) {
+        clearInterval(this.initTimer);
+        this.initTimer = null;
+    }
+};
+
+Display.prototype.showError = function(text) {
+    this.body = [
+        color.red(text)
     ];
 
     this.display();
+}
+
+Display.prototype.clear = function() {
+    ctx.reset();
 };
 
 Display.prototype.display = function() {
     ctx.clear();
     ctx.save();
-    ctx.translate(3, 5);
+    ctx.translate(5, 3);
 
     var y = 0;
 
